@@ -8,7 +8,7 @@ public class XmlComponentTest
     {
         
     }
-    
+
     [Theory]
     [InlineData("<a>", 0, 3, "a", XmlComponentType.StartTag)]
     [InlineData("</a>", 0, 4, "a", XmlComponentType.EndTag)]

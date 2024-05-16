@@ -4,6 +4,7 @@ namespace SimpleXMLValidatorLibrary
     {
         StartTag,
         EndTag,
+        SelfClosingTag,
     }
 
     public struct XmlComponent
@@ -25,6 +26,8 @@ namespace SimpleXMLValidatorLibrary
                     return $"<{Name}>";
                 case XmlComponentType.EndTag:
                     return $"</{Name}>";
+                case XmlComponentType.SelfClosingTag:
+                    return $"<{Name}/>";
                 default:
                     return "";
             }
@@ -33,6 +36,11 @@ namespace SimpleXMLValidatorLibrary
         public bool IsStartTag()
         {
             return Type == XmlComponentType.StartTag;
+        }
+
+        public bool IsSelfClosingTag()
+        {
+            return Type == XmlComponentType.SelfClosingTag;
         }
 
         /// <summary>
@@ -74,24 +82,31 @@ namespace SimpleXMLValidatorLibrary
                 return -1;
             }
 
-            int len = endBracket - startBracket - 1;
+            // int len = endBracket - startBracket - 1;
 
-            bool isStartTag = true;
-            if (input[startBracket + 1] == '/')
+            var type = XmlComponentType.StartTag;
+            var nameStart = startBracket + 1;
+            var nameEnd = endBracket - 1;
+            if (input[nameStart] == '/')
             {
-                isStartTag = false;
-                startBracket++;
-                len--;
+                type = XmlComponentType.EndTag;
+                nameStart++;
+                // len--;
+            }
+            else if (input[nameEnd] == '/')
+            {
+                type = XmlComponentType.SelfClosingTag;
+                nameEnd--;
             }
 
-            var name = input.Substring(startBracket + 1, len);
+            var name = input.Substring(nameStart, nameEnd + 1 - nameStart);
             // must no '<' in tag
             if (name.IndexOf('<') > -1)
             {
                 return -1;
             }
 
-            next = new XmlComponent(name, isStartTag ? XmlComponentType.StartTag: XmlComponentType.EndTag);
+            next = new XmlComponent(name, type);
             return endBracket + 1;
         }
     }
