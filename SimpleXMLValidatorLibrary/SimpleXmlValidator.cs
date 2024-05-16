@@ -5,7 +5,44 @@
         //Please implement this method
         public static bool DetermineXml(string xml)
         {
-            throw new NotImplementedException();
+            Stack<XmlTag> stack = new Stack<XmlTag>();
+            xml = xml.Trim();
+            XmlTag? root = null;
+            var index = 0;
+            while (index > -1 && index < xml.Length) {
+                XmlTag? next = null;
+                index = XmlTag.FindNext(xml, ref next, index);
+                if (next == null || index < 0) {
+                    System.Console.WriteLine($"No tag found");
+                    break;
+                }
+
+                if (next.Value.IsStartTag) {
+                    if (root == null) {
+                        root = next;
+                    }
+                    else if (stack.Count == 0) {
+                        System.Console.WriteLine($"Extra content after end of document");
+                        return false;
+                    }
+                    stack.Push(next.Value);
+                    System.Console.WriteLine($"Push: {next}");
+                    continue;
+                }
+
+                if (stack.Count == 0) {
+                    System.Console.WriteLine($"Empty stack");
+                    return false;
+                }
+
+                var startTag = stack.Pop();
+                if (startTag.Name != next.Value.Name) {
+                    System.Console.WriteLine($"Tag not match: {startTag}, {next}");
+                    return false;
+                }
+                System.Console.WriteLine($" Pop: {startTag}");
+            }
+            return true;
         }
     }
 }
