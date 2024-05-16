@@ -5,19 +5,19 @@
         //Please implement this method
         public static bool DetermineXml(string xml)
         {
-            Stack<XmlTag> stack = new Stack<XmlTag>();
+            Stack<XmlComponent> stack = new Stack<XmlComponent>();
             xml = xml.Trim();
-            XmlTag? root = null;
+            XmlComponent? root = null;
             var index = 0;
             while (index > -1 && index < xml.Length) {
-                XmlTag? next = null;
-                index = XmlTag.FindNext(xml, ref next, index);
+                XmlComponent? next = null;
+                index = XmlComponent.FindNextTag(xml, ref next, index);
                 if (next == null || index < 0) {
                     System.Console.WriteLine($"No tag found");
                     break;
                 }
 
-                if (next.Value.IsStartTag) {
+                if (next.Value.IsStartTag()) {
                     if (root == null) {
                         root = next;
                     }

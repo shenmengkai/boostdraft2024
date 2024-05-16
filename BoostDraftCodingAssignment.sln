@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleXmlValidatorLibrary",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main", "Main\Main.csproj", "{9CAB8BB3-B1E0-4EC5-B5C5-70E9439D6BBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{4FB38E30-6299-4E60-BAF4-C4A37C08349D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9CAB8BB3-B1E0-4EC5-B5C5-70E9439D6BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CAB8BB3-B1E0-4EC5-B5C5-70E9439D6BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CAB8BB3-B1E0-4EC5-B5C5-70E9439D6BBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FB38E30-6299-4E60-BAF4-C4A37C08349D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB38E30-6299-4E60-BAF4-C4A37C08349D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB38E30-6299-4E60-BAF4-C4A37C08349D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB38E30-6299-4E60-BAF4-C4A37C08349D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
