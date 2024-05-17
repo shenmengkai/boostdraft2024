@@ -4,14 +4,37 @@
 initial PR of xml validator
 
 ## Usage
+command `checker` followed by XML string input
 
+1. When input is well-formed XML string, will prints **Valid**, and return 0
+  - for Windows
 ```console
 > checker.exe "<Design><Code>hello world</Code></Design>"
 Valid
+> echo %ERRORLEVEL%
+0
 ```
+  - for Linux/Mac
+```console
+> checker "<Design><Code>hello world</Code></Design>"
+Valid
+> echo $?
+0
+```
+2. When input is invalid format, will prints **Invalid**, and return 1
+  - for Windows
 ```console
 > checker.exe "<Design><Code>hello world</Code></Design><People>"
 Invalid
+> echo %ERRORLEVEL%
+1
+```
+  - for Linux/Mac
+```console
+> checker "<Design><Code>hello world</Code></Design><People>"
+Invalid
+> echo $?
+1
 ```
 
 ## Enviroment
