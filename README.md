@@ -43,11 +43,11 @@ Invalid
 ## Implementation
 Principle is to validate XML tags in order by stack structure.
 
-|    Folder| Module             | Description |
-|        -:| -                  | - |
-| Services/| SimpleXmlValidator | XML validator service. |
-|   Models/| XmlTagStack        | Collect the relations between XML tags. Defines orders, restriction and vialation in document level. |
-|          | XmlComponent       | Defines all kinds of XML tag and utility to extract tags. It contains valid charaters, syntax and formats, |
+|                              Folder| Module             | Description |
+|                                  -:| -                  | - |
+| SimpleXMLValidatorLibrary/<br>Services/| [SimpleXmlValidator](./SimpleXMLValidatorLibrary/Services/SimpleXmlValidator.cs) | XML validator service. |
+|   SimpleXMLValidatorLibrary/<br>Models/| [XmlTagStack](./SimpleXMLValidatorLibrary/Models/XmlTagStack.cs)                 | Collect the relations between XML tags. Defines orders, restriction and vialation in document level. |
+|                                    | [XmlComponent](./SimpleXMLValidatorLibrary/Models/XmlComponent.cs)               | Defines all kinds of XML tag and utility to extract tags. It contains valid charaters, syntax and formats, |
 
 ## Test cases
 Test.csproj is xUnit project to manage related test cases
