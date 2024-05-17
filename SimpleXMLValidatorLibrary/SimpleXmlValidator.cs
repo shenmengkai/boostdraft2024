@@ -5,9 +5,9 @@
         //Please implement this method
         public static bool DetermineXml(string xml)
         {
-            Stack<XmlComponent> stack = new Stack<XmlComponent>();
+            TagStack tagStack = new TagStack();
+            
             xml = xml.Trim();
-            XmlComponent? root = null;
             var index = 0;
             while (index > -1 && index < xml.Length) {
                 XmlComponent? next = null;
@@ -19,32 +19,63 @@
                 if (next.Value.IsSelfClosingTag()) {
                     continue;
                 }
-                else if (next.Value.IsStartTag()) {
-                    if (root == null) {
-                        root = next;
-                    }
-                    else if (stack.Count == 0) {
+
+                if (next.Value.IsStartTag()) {
+                    if (tagStack.isDocumentClosed) {
                         return false;
                     }
-                    stack.Push(next.Value);
+                    tagStack.Push(next.Value);
                     continue;
                 }
 
-                if (stack.Count == 0) {
+                if (tagStack.NoMatchedTag(next.Value.Name)) {
                     return false;
                 }
 
-                var startTag = stack.Pop();
-                if (startTag.Name != next.Value.Name) {
-                    return false;
-                }
+                tagStack.Pop();
             }
 
-            if (stack.Count > 0)
+            if (tagStack.Count > 0)
             {
                 return false;
             }
             return true;
+        }
+    }
+
+    class TagStack : Stack<XmlComponent>
+    {
+        public XmlComponent? Root { get; private set; }
+
+        public bool isDocumentClosed
+        {
+            get
+            {
+                return Root.HasValue && Count == 0;
+            }
+        }
+
+        public new void Push(XmlComponent tag)
+        {
+            if (isDocumentClosed) {
+                return;
+            }
+
+            Root = tag;
+            base.Push(tag);
+        }
+
+        public bool NoMatchedTag(string name)
+        {
+            if (Count == 0) {
+                return true;
+            }
+
+            if (Peek().Name != name) {
+                return true;
+            }
+
+            return false;
         }
     }
 }

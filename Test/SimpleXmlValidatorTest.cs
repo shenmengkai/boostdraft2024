@@ -22,6 +22,8 @@ public class SimpleXMLValidatorTest
     [InlineData("<a>")]
     [InlineData("<a></a><")]
     [InlineData("<a></a>x")]
+    [InlineData("<a>x</a><")]
+    [InlineData("<a t=\"1\"></a>")]
     [InlineData("<a><b></b>")]
     [InlineData("<a><b></a>")]
     [InlineData("<a></a><b></b>")]
