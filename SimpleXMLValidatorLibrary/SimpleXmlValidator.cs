@@ -5,7 +5,7 @@
         //Please implement this method
         public static bool DetermineXml(string xml)
         {
-            TagStack tagStack = new TagStack();
+            XmlTagStack tagStack = new XmlTagStack();
             
             xml = xml.Trim();
             var index = 0;
@@ -40,42 +40,6 @@
                 return false;
             }
             return true;
-        }
-    }
-
-    class TagStack : Stack<XmlComponent>
-    {
-        public XmlComponent? Root { get; private set; }
-
-        public bool isDocumentClosed
-        {
-            get
-            {
-                return Root.HasValue && Count == 0;
-            }
-        }
-
-        public new void Push(XmlComponent tag)
-        {
-            if (isDocumentClosed) {
-                return;
-            }
-
-            Root = tag;
-            base.Push(tag);
-        }
-
-        public bool NoMatchedTag(string name)
-        {
-            if (Count == 0) {
-                return true;
-            }
-
-            if (Peek().Name != name) {
-                return true;
-            }
-
-            return false;
         }
     }
 }
