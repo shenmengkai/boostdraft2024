@@ -64,6 +64,7 @@ Xml tag property cases of all types, start/end/self-closing
 [InlineData("<a >", 0, 4, "a", XmlComponentType.StartTag)]
 [InlineData("xxx</a>", 0, 7, "a", XmlComponentType.EndTag)]
 [InlineData("xxx</a>", 3, 7, "a", XmlComponentType.EndTag)]
+[InlineData("<a/>", 0, 4, "a", XmlComponentType.SelfClosingTag)]
 ```
 - strings should fails to extract tag
 ```csharp

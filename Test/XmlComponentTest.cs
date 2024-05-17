@@ -15,6 +15,7 @@ public class XmlComponentTest
     [InlineData("<a >", 0, 4, "a", XmlComponentType.StartTag)]
     [InlineData("xxx</a>", 0, 7, "a", XmlComponentType.EndTag)]
     [InlineData("xxx</a>", 3, 7, "a", XmlComponentType.EndTag)]
+    [InlineData("<a/>", 0, 4, "a", XmlComponentType.SelfClosingTag)]
     public void FindNextTagNormal(string xml, int index, int expectNext, string expectTagName, XmlComponentType expectTagType)
     {
         XmlComponent? tag = null;
